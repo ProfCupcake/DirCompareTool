@@ -11,6 +11,7 @@ import DirCompareTool.Test.Debug;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,7 +60,7 @@ public class DirectoryCompare
                 {
                     if (compareLevel < 1 || t.toFile().isDirectory() || fileSize(t) == fileSize(i))
                     {
-                        if (compareLevel < 2 || t.toFile().isDirectory() || digest(t) == digest(i))
+                        if (compareLevel < 2 || t.toFile().isDirectory() || Arrays.equals(digest(t), digest(i)))
                         {
                             Debug.debugMessage("Match found.");
                             result.addMatch(t);

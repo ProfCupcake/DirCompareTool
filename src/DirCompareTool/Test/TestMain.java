@@ -48,10 +48,10 @@ public class TestMain
         System.out.println("TEST 5: second has same files but with different content, compare level 1");
         doTest(testDir1, testDir4, 1);
         
-        System.out.println("TEST 5: second has same file sizes but content differs, compare level 1");
+        System.out.println("TEST 6: second has same file sizes but content differs, compare level 1");
         doTest(testDir1, testDir5, 1);
         
-        System.out.println("TEST 5: second has same file sizes but content differs, compare level 2");
+        System.out.println("TEST 7: second has same file sizes but content differs, compare level 2");
         doTest(testDir1, testDir5, 2);
     }
     
