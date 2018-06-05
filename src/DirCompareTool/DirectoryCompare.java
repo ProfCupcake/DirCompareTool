@@ -39,7 +39,6 @@ public class DirectoryCompare
         /*
          * Notes for expansion:-
          *  - Add option for reverse double-checking (i.e. walk dir2 and check against as well)
-         *  - Add options deeper checks for matching files (e.g. checking file size, hashing files)
          *  - Option to ignore directories themselves?
          */
         CompareResult result = new CompareResult();
