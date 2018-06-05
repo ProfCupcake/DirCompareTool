@@ -8,6 +8,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,20 +21,47 @@ public class MainCommandLine
     {
         FileSystem fileSystem = FileSystems.getDefault();
         
-        // TODO: More robust argument handling
+        Path dir1 = null;
+        Path dir2 = null;
+        int depth = 0;
         
-        if (args.length < 2)
-        {
-            System.out.println("Arguments: <directory 1> <directory 2> [comparison depth]");
-            return;
-        }
+        Iterator<String> i = new Iterator<String>() {
+            int curIndex = 0;
+            
+            @Override
+            public boolean hasNext()
+            {
+                return (curIndex < args.length);
+            }
+
+            @Override
+            public String next()
+            {
+                return args[curIndex++];
+            }
+        };
         
         // TODO: Input verification
         
-        Path dir1 = fileSystem.getPath(args[0]);
-        Path dir2 = fileSystem.getPath(args[1]);
-        int depth = 0;
-        if (args.length > 2) depth = Integer.parseInt(args[2]);
+        while (i.hasNext())
+        {
+            String curArg = i.next();
+            switch (curArg)
+            {
+                case ("--source"):
+                case ("-s"): dir1 = fileSystem.getPath(i.next()); break;
+                case ("--target"):
+                case ("-t"): dir2 = fileSystem.getPath(i.next()); break;
+                case ("--depth"):
+                case ("-d"): depth = Integer.parseInt(i.next()); break;
+            }
+        }
+        
+        if (dir1 == null || dir2 == null)
+        {
+            // TODO: Help text
+            return;
+        }
         
         try
         {
